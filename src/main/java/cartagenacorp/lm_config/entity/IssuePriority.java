@@ -7,11 +7,11 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "issue_status")
+@Table(name = "issue_priority")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class IssueStatus {
+public class IssuePriority {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -22,4 +22,3 @@ public class IssueStatus {
     @JsonBackReference
     private ProjectConfig projectConfig;
 }
-
