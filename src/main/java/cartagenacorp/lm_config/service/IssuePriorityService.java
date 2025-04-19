@@ -30,10 +30,9 @@ public class IssuePriorityService {
     }
 
     @Transactional
-    public NamedIdDTO create(UUID projectId, String name) {
+    public NamedIdDTO create(UUID projectId, NamedIdDTO namedIdDTO) {
         ProjectConfig config = configService.getOrCreateConfig(projectId);
-        IssuePriority priority = new IssuePriority();
-        priority.setName(name);
+        IssuePriority priority = namedIdMapper.toEntityIssuePriority(namedIdDTO);
         priority.setProjectConfig(config);
         return namedIdMapper.toDto(priorityRepository.save(priority));
     }
@@ -46,10 +45,10 @@ public class IssuePriorityService {
     }
 
     @Transactional
-    public NamedIdDTO update(Long id, String name) {
+    public NamedIdDTO update(Long id, NamedIdDTO namedIdDTO) {
         IssuePriority priority = priorityRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
-        priority.setName(name);
+        namedIdMapper.partialUpdateIssuePriority(namedIdDTO, priority);
         return namedIdMapper.toDto(priorityRepository.save(priority));
     }
 

@@ -18,6 +18,8 @@ public class IssuePriority {
 
     private String name;
 
+    private String color;
+
     @ManyToOne
     @JsonBackReference
     private ProjectConfig projectConfig;

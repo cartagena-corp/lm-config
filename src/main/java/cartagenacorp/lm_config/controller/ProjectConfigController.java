@@ -1,6 +1,5 @@
 package cartagenacorp.lm_config.controller;
 
-import cartagenacorp.lm_config.dto.ProjectConfigDTO;
 import cartagenacorp.lm_config.entity.ProjectConfig;
 import cartagenacorp.lm_config.service.ProjectConfigService;
 import cartagenacorp.lm_config.util.RequiresPermission;

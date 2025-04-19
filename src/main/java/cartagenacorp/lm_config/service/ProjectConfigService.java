@@ -45,23 +45,23 @@ public class ProjectConfigService {
         if (projectConfig.getIssueStatuses() == null || projectConfig.getIssueStatuses().isEmpty()) {
 
             List<IssueStatus> defaultStatuses = Arrays.asList(
-                    new IssueStatus(null, "Nuevo", projectConfig),
-                    new IssueStatus(null, "En progreso", projectConfig),
-                    new IssueStatus(null, "Finalizado", projectConfig)
+                    new IssueStatus(null, "Nuevo", "#3498db", projectConfig),
+                    new IssueStatus(null, "En progreso", "#f1c40f",  projectConfig),
+                    new IssueStatus(null, "Finalizado", "#2ecc71",  projectConfig)
             );
             issueStatusRepository.saveAll(defaultStatuses);
 
             List<IssueType> defaultTypes = Arrays.asList(
-                    new IssueType(null, "Bug", projectConfig),
-                    new IssueType(null, "Historia", projectConfig),
-                    new IssueType(null, "Tarea", projectConfig)
+                    new IssueType(null, "Bug", "#e74c3c",  projectConfig),
+                    new IssueType(null, "Historia", "#9b59b6",  projectConfig),
+                    new IssueType(null, "Tarea", "#2980b9",  projectConfig)
             );
             issueTypeRepository.saveAll(defaultTypes);
 
             List<IssuePriority> defaultPriorities = Arrays.asList(
-                    new IssuePriority(null, "Baja", projectConfig),
-                    new IssuePriority(null, "Media", projectConfig),
-                    new IssuePriority(null, "Alta", projectConfig)
+                    new IssuePriority(null, "Baja", "#27ae60",  projectConfig),
+                    new IssuePriority(null, "Media", "#f39c12",  projectConfig),
+                    new IssuePriority(null, "Alta", "#c0392b",  projectConfig)
             );
             issuePriorityRepository.saveAll(defaultPriorities);
 

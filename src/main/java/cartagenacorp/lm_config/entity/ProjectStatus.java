@@ -16,4 +16,6 @@ public class ProjectStatus {
     private Long id;
 
     private String name;
+
+    private String color;
 }

@@ -30,10 +30,9 @@ public class IssueStatusService {
     }
 
     @Transactional
-    public NamedIdDTO create(UUID projectId, String name) {
+    public NamedIdDTO create(UUID projectId, NamedIdDTO namedIdDTO) {
         ProjectConfig config = configService.getOrCreateConfig(projectId);
-        IssueStatus status = new IssueStatus();
-        status.setName(name);
+        IssueStatus status = namedIdMapper.toEntityIssueStatus(namedIdDTO);
         status.setProjectConfig(config);
         return namedIdMapper.toDto(statusRepository.save(status));
     }
@@ -46,10 +45,10 @@ public class IssueStatusService {
     }
 
     @Transactional
-    public NamedIdDTO update(Long id, String name) {
+    public NamedIdDTO update(Long id, NamedIdDTO namedIdDTO) {
         IssueStatus status = statusRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
-        status.setName(name);
+        namedIdMapper.partialUpdateIssueStatus(namedIdDTO, status);
         return namedIdMapper.toDto(statusRepository.save(status));
     }
 

@@ -24,9 +24,8 @@ public class ProjectStatusService {
         this.namedIdMapper = namedIdMapper;
     }
 
-    public NamedIdDTO create(String name) {
-        ProjectStatus status = new ProjectStatus();
-        status.setName(name);
+    public NamedIdDTO create(NamedIdDTO namedIdDTO) {
+        ProjectStatus status = namedIdMapper.toEntityProjectStatus(namedIdDTO);
         return namedIdMapper.toDto(statusRepository.save(status));
     }
 
@@ -36,10 +35,10 @@ public class ProjectStatusService {
                 .collect(Collectors.toList());
     }
 
-    public NamedIdDTO update(Long id, String name) {
+    public NamedIdDTO update(Long id, NamedIdDTO namedIdDTO) {
         ProjectStatus status = statusRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Status not found"));
-        status.setName(name);
+        namedIdMapper.partialUpdateProjectStatus(namedIdDTO, status);
         return namedIdMapper.toDto(statusRepository.save(status));
     }
 

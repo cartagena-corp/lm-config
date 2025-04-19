@@ -3,13 +3,13 @@ package cartagenacorp.lm_config.controller;
 import cartagenacorp.lm_config.dto.NamedIdDTO;
 import cartagenacorp.lm_config.service.ProjectStatusService;
 import cartagenacorp.lm_config.util.RequiresPermission;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/api/config/project-statuses")
@@ -24,8 +24,8 @@ public class ProjectStatusController {
 
     @PostMapping
     @RequiresPermission({"CONFIG_CRUD"})
-    public ResponseEntity<NamedIdDTO> create(@RequestBody NamedIdDTO namedIdDTO) {
-        return new ResponseEntity<>(service.create(namedIdDTO.getName()), HttpStatus.CREATED);
+    public ResponseEntity<NamedIdDTO> create(@RequestBody @Valid NamedIdDTO namedIdDTO) {
+        return new ResponseEntity<>(service.create(namedIdDTO), HttpStatus.CREATED);
     }
 
     @GetMapping
@@ -35,8 +35,8 @@ public class ProjectStatusController {
 
     @PutMapping("/{id}")
     @RequiresPermission({"CONFIG_CRUD"})
-    public NamedIdDTO update(@PathVariable Long id, @RequestBody NamedIdDTO namedIdDTO) {
-        return service.update(id, namedIdDTO.getName());
+    public NamedIdDTO update(@PathVariable Long id, @RequestBody @Valid NamedIdDTO namedIdDTO) {
+        return service.update(id, namedIdDTO);
     }
 
     @DeleteMapping("/{id}")
