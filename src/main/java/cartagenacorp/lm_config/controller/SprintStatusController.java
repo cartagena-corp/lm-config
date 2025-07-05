@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/config/sprint-statuses")
@@ -22,15 +23,15 @@ public class SprintStatusController {
         this.service = service;
     }
 
-    @PostMapping
+    @PostMapping("/{projectId}")
     @RequiresPermission({"CONFIG_CRUD"})
-    public ResponseEntity<NamedIdDTO> create(@RequestBody @Valid NamedIdDTO namedIdDTO) {
-        return new ResponseEntity<>(service.create(namedIdDTO), HttpStatus.CREATED);
+    public ResponseEntity<NamedIdDTO> create(@PathVariable UUID projectId, @RequestBody @Valid NamedIdDTO namedIdDTO) {
+        return new ResponseEntity<>(service.create(projectId, namedIdDTO), HttpStatus.CREATED);
     }
 
-    @GetMapping
-    public List<NamedIdDTO> getAll() {
-        return service.getAll();
+    @GetMapping("/{projectId}")
+    public List<NamedIdDTO> getAll(@PathVariable UUID projectId) {
+        return service.getAll(projectId);
     }
 
     @PutMapping("/{id}")

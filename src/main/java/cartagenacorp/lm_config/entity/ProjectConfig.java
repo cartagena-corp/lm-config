@@ -35,4 +35,8 @@ public class ProjectConfig {
     @JsonManagedReference
     private List<IssueType> issueTypes = new ArrayList<>();
 
+    @OneToMany(mappedBy = "projectConfig", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    @JsonManagedReference
+    private List<SprintStatus> sprintStatuses = new ArrayList<>();
+
 }

@@ -1,5 +1,6 @@
 package cartagenacorp.lm_config.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -18,4 +19,8 @@ public class SprintStatus {
     private String name;
 
     private String color;
+
+    @ManyToOne
+    @JsonBackReference
+    private ProjectConfig projectConfig;
 }

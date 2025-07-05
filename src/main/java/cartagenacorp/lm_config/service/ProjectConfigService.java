@@ -1,13 +1,7 @@
 package cartagenacorp.lm_config.service;
 
-import cartagenacorp.lm_config.entity.IssuePriority;
-import cartagenacorp.lm_config.entity.IssueStatus;
-import cartagenacorp.lm_config.entity.IssueType;
-import cartagenacorp.lm_config.entity.ProjectConfig;
-import cartagenacorp.lm_config.repository.IssuePriorityRepository;
-import cartagenacorp.lm_config.repository.IssueStatusRepository;
-import cartagenacorp.lm_config.repository.IssueTypeRepository;
-import cartagenacorp.lm_config.repository.ProjectConfigRepository;
+import cartagenacorp.lm_config.entity.*;
+import cartagenacorp.lm_config.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,16 +16,19 @@ public class ProjectConfigService {
     private final IssueStatusRepository issueStatusRepository;
     private final IssueTypeRepository issueTypeRepository;
     private final IssuePriorityRepository issuePriorityRepository;
+    private final SprintStatusRepository sprintStatusRepository;
 
     @Autowired
     public ProjectConfigService(ProjectConfigRepository configRepository,
                                 IssueStatusRepository issueStatusRepository,
                                 IssueTypeRepository issueTypeRepository,
-                                IssuePriorityRepository issuePriorityRepository) {
+                                IssuePriorityRepository issuePriorityRepository,
+                                SprintStatusRepository sprintStatusRepository) {
         this.configRepository = configRepository;
         this.issueStatusRepository = issueStatusRepository;
         this.issueTypeRepository = issueTypeRepository;
         this.issuePriorityRepository = issuePriorityRepository;
+        this.sprintStatusRepository = sprintStatusRepository;
     }
 
     public ProjectConfig getOrCreateConfig(UUID projectId) {
@@ -65,9 +62,16 @@ public class ProjectConfigService {
             );
             issuePriorityRepository.saveAll(defaultPriorities);
 
+            List<SprintStatus> defaultSprintStatuses = Arrays.asList(
+                    new SprintStatus(null, "Planificado", "#3498db", projectConfig),
+                    new SprintStatus(null, "En progreso", "#f1c40f", projectConfig),
+                    new SprintStatus(null, "Completado", "#2ecc71", projectConfig)
+            );
+
             projectConfig.setIssueStatuses(defaultStatuses);
             projectConfig.setIssueTypes(defaultTypes);
             projectConfig.setIssuePriorities(defaultPriorities);
+            projectConfig.setSprintStatuses(defaultSprintStatuses);
 
             projectConfig = configRepository.save(projectConfig);
         }
