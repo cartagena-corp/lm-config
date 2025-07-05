@@ -17,18 +17,21 @@ public class ProjectConfigService {
     private final IssueTypeRepository issueTypeRepository;
     private final IssuePriorityRepository issuePriorityRepository;
     private final SprintStatusRepository sprintStatusRepository;
+    private final IssueDescriptionsRepository issueDescriptionsRepository;
 
     @Autowired
     public ProjectConfigService(ProjectConfigRepository configRepository,
                                 IssueStatusRepository issueStatusRepository,
                                 IssueTypeRepository issueTypeRepository,
                                 IssuePriorityRepository issuePriorityRepository,
-                                SprintStatusRepository sprintStatusRepository) {
+                                SprintStatusRepository sprintStatusRepository,
+                                IssueDescriptionsRepository issueDescriptionsRepository) {
         this.configRepository = configRepository;
         this.issueStatusRepository = issueStatusRepository;
         this.issueTypeRepository = issueTypeRepository;
         this.issuePriorityRepository = issuePriorityRepository;
         this.sprintStatusRepository = sprintStatusRepository;
+        this.issueDescriptionsRepository = issueDescriptionsRepository;
     }
 
     public ProjectConfig getOrCreateConfig(UUID projectId) {
@@ -67,11 +70,19 @@ public class ProjectConfigService {
                     new SprintStatus(null, "En progreso", "#f1c40f", projectConfig),
                     new SprintStatus(null, "Completado", "#2ecc71", projectConfig)
             );
+            sprintStatusRepository.saveAll(defaultSprintStatuses);
+
+            List<IssueDescriptions> defaultDescriptions = Arrays.asList(
+                    new IssueDescriptions(null, "Descripción", projectConfig)
+            );
+            issueDescriptionsRepository.saveAll(defaultDescriptions);
+
 
             projectConfig.setIssueStatuses(defaultStatuses);
             projectConfig.setIssueTypes(defaultTypes);
             projectConfig.setIssuePriorities(defaultPriorities);
             projectConfig.setSprintStatuses(defaultSprintStatuses);
+            projectConfig.setIssueDescriptions(defaultDescriptions);
 
             projectConfig = configRepository.save(projectConfig);
         }
