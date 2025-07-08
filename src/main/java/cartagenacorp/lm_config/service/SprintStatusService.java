@@ -39,7 +39,7 @@ public class SprintStatusService {
 
     @Transactional(readOnly = true)
     public List<NamedIdDTO> getAll(UUID projectId) {
-        return statusRepository.findByProjectConfig_ProjectId(projectId).stream()
+        return statusRepository.findByProjectConfig_ProjectIdOrderByOrderIndexAsc(projectId).stream()
                 .map(namedIdMapper::toDto)
                 .collect(Collectors.toList());
     }

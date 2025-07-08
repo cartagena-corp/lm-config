@@ -39,7 +39,7 @@ public class IssuePriorityService {
 
     @Transactional(readOnly = true)
     public List<NamedIdDTO> getAll(UUID projectId) {
-        return priorityRepository.findByProjectConfig_ProjectId(projectId).stream()
+        return priorityRepository.findByProjectConfig_ProjectIdOrderByOrderIndexAsc(projectId).stream()
                 .map(namedIdMapper::toDto)
                 .collect(Collectors.toList());
     }

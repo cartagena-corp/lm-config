@@ -18,4 +18,6 @@ public class NamedIdDTO {
     @NotBlank(message = "Color cannot be blank")
     @Pattern(regexp = "^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$", message = "Color must be a valid hex color code")
     private String color;
+
+    private Integer orderIndex;
 }

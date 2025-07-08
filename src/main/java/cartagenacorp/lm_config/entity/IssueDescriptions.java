@@ -21,4 +21,6 @@ public class IssueDescriptions {
     @ManyToOne
     @JsonBackReference
     private ProjectConfig projectConfig;
+
+    private Integer orderIndex;
 }

@@ -30,7 +30,7 @@ public class ProjectStatusService {
     }
 
     public List<NamedIdDTO> getAll() {
-        return statusRepository.findAll().stream()
+        return statusRepository.findAllByOrderByOrderIndexAsc().stream()
                 .map(namedIdMapper::toDto)
                 .collect(Collectors.toList());
     }

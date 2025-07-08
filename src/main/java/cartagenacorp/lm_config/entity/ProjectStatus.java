@@ -18,4 +18,6 @@ public class ProjectStatus {
     private String name;
 
     private String color;
+
+    private Integer orderIndex;
 }

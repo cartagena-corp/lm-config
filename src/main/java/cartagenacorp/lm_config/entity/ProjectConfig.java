@@ -25,22 +25,27 @@ public class ProjectConfig {
 
     @OneToMany(mappedBy = "projectConfig", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     @JsonManagedReference
+    @OrderBy("orderIndex ASC")
     private List<IssueStatus> issueStatuses = new ArrayList<>();
 
     @OneToMany(mappedBy = "projectConfig", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     @JsonManagedReference
+    @OrderBy("orderIndex ASC")
     private List<IssuePriority> issuePriorities = new ArrayList<>();
 
     @OneToMany(mappedBy = "projectConfig", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     @JsonManagedReference
+    @OrderBy("orderIndex ASC")
     private List<IssueType> issueTypes = new ArrayList<>();
 
     @OneToMany(mappedBy = "projectConfig", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     @JsonManagedReference
+    @OrderBy("orderIndex ASC")
     private List<SprintStatus> sprintStatuses = new ArrayList<>();
 
     @OneToMany(mappedBy = "projectConfig", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     @JsonManagedReference
+    @OrderBy("orderIndex ASC")
     private List<IssueDescriptions> issueDescriptions = new ArrayList<>();
 
 }

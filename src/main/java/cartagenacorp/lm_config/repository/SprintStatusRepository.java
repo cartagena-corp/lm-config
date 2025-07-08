@@ -9,5 +9,5 @@ import java.util.UUID;
 
 @Repository
 public interface SprintStatusRepository extends JpaRepository<SprintStatus, Long> {
-    List<SprintStatus> findByProjectConfig_ProjectId(UUID projectId);
+    List<SprintStatus> findByProjectConfig_ProjectIdOrderByOrderIndexAsc(UUID projectId);
 }

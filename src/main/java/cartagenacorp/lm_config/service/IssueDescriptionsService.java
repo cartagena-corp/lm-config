@@ -40,7 +40,7 @@ public class IssueDescriptionsService {
 
     @Transactional(readOnly = true)
     public List<IssueDescriptionsDto> getAll(UUID projectId) {
-        return issueDescriptionsRepository.findByProjectConfig_ProjectId(projectId).stream()
+        return issueDescriptionsRepository.findByProjectConfig_ProjectIdOrderByOrderIndexAsc(projectId).stream()
                 .map(issueDescriptionsMapper::toDto)
                 .collect(Collectors.toList());
     }

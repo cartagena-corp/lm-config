@@ -9,5 +9,5 @@ import java.util.UUID;
 
 @Repository
 public interface IssueDescriptionsRepository extends JpaRepository<IssueDescriptions, Long> {
-    List<IssueDescriptions> findByProjectConfig_ProjectId(UUID projectId);
+    List<IssueDescriptions> findByProjectConfig_ProjectIdOrderByOrderIndexAsc(UUID projectId);
 }

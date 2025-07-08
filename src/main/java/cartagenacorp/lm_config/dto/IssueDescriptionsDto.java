@@ -18,4 +18,6 @@ public class IssueDescriptionsDto implements Serializable {
 
     @NotBlank(message = "Name cannot be blank")
     private String name;
+
+    private Integer orderIndex;
 }

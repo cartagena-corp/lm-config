@@ -23,5 +23,7 @@ public class IssueStatus {
     @ManyToOne
     @JsonBackReference
     private ProjectConfig projectConfig;
+
+    private Integer orderIndex;
 }
 

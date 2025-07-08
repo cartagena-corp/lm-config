@@ -39,7 +39,7 @@ public class IssueTypeService {
 
     @Transactional(readOnly = true)
     public List<NamedIdDTO> getAll(UUID projectId) {
-        return typeRepository.findByProjectConfig_ProjectId(projectId).stream()
+        return typeRepository.findByProjectConfig_ProjectIdOrderByOrderIndexAsc(projectId).stream()
                 .map(namedIdMapper::toDto)
                 .collect(Collectors.toList());
     }

@@ -23,4 +23,6 @@ public class SprintStatus {
     @ManyToOne
     @JsonBackReference
     private ProjectConfig projectConfig;
+
+    private Integer orderIndex;
 }

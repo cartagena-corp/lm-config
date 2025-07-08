@@ -45,35 +45,35 @@ public class ProjectConfigService {
         if (projectConfig.getIssueStatuses() == null || projectConfig.getIssueStatuses().isEmpty()) {
 
             List<IssueStatus> defaultStatuses = Arrays.asList(
-                    new IssueStatus(null, "Nuevo", "#3498db", projectConfig),
-                    new IssueStatus(null, "En progreso", "#f1c40f",  projectConfig),
-                    new IssueStatus(null, "Finalizado", "#2ecc71",  projectConfig)
+                    new IssueStatus(null, "Nuevo", "#3498db", projectConfig, 1),
+                    new IssueStatus(null, "En progreso", "#f1c40f",  projectConfig, 2),
+                    new IssueStatus(null, "Finalizado", "#2ecc71",  projectConfig, 3)
             );
             issueStatusRepository.saveAll(defaultStatuses);
 
             List<IssueType> defaultTypes = Arrays.asList(
-                    new IssueType(null, "Bug", "#e74c3c",  projectConfig),
-                    new IssueType(null, "Historia", "#9b59b6",  projectConfig),
-                    new IssueType(null, "Tarea", "#2980b9",  projectConfig)
+                    new IssueType(null, "Bug", "#e74c3c",  projectConfig, 1),
+                    new IssueType(null, "Historia", "#9b59b6",  projectConfig, 2),
+                    new IssueType(null, "Tarea", "#2980b9",  projectConfig, 3)
             );
             issueTypeRepository.saveAll(defaultTypes);
 
             List<IssuePriority> defaultPriorities = Arrays.asList(
-                    new IssuePriority(null, "Baja", "#27ae60",  projectConfig),
-                    new IssuePriority(null, "Media", "#f39c12",  projectConfig),
-                    new IssuePriority(null, "Alta", "#c0392b",  projectConfig)
+                    new IssuePriority(null, "Baja", "#27ae60",  projectConfig, 1),
+                    new IssuePriority(null, "Media", "#f39c12",  projectConfig, 2),
+                    new IssuePriority(null, "Alta", "#c0392b",  projectConfig, 3)
             );
             issuePriorityRepository.saveAll(defaultPriorities);
 
             List<SprintStatus> defaultSprintStatuses = Arrays.asList(
-                    new SprintStatus(null, "Planificado", "#3498db", projectConfig),
-                    new SprintStatus(null, "En progreso", "#f1c40f", projectConfig),
-                    new SprintStatus(null, "Completado", "#2ecc71", projectConfig)
+                    new SprintStatus(null, "Planificado", "#3498db", projectConfig, 1),
+                    new SprintStatus(null, "En progreso", "#f1c40f", projectConfig, 2),
+                    new SprintStatus(null, "Completado", "#2ecc71", projectConfig, 3)
             );
             sprintStatusRepository.saveAll(defaultSprintStatuses);
 
             List<IssueDescriptions> defaultDescriptions = Arrays.asList(
-                    new IssueDescriptions(null, "Descripción", projectConfig)
+                    new IssueDescriptions(null, "Descripción", projectConfig, 1)
             );
             issueDescriptionsRepository.saveAll(defaultDescriptions);
 

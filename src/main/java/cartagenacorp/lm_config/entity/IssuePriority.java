@@ -23,4 +23,6 @@ public class IssuePriority {
     @ManyToOne
     @JsonBackReference
     private ProjectConfig projectConfig;
+
+    private Integer orderIndex;
 }
