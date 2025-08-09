@@ -24,9 +24,9 @@ public interface ProjectConfigMapper {
         projectConfig.getIssueTypes().forEach(issueType -> issueType.setProjectConfig(projectConfig));
     }
 
-    @Mapping(source = "issueStatuses", target = "issueStatuses")
-    @Mapping(source = "issuePriorities", target = "issuePriorities")
-    @Mapping(source = "issueTypes", target = "issueTypes")
+//    @Mapping(source = "issueStatuses", target = "issueStatuses")
+//    @Mapping(source = "issuePriorities", target = "issuePriorities")
+//    @Mapping(source = "issueTypes", target = "issueTypes")
     ProjectConfigDTO toDto(ProjectConfig projectConfig);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
