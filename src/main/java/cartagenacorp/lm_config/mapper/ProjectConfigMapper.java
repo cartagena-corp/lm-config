@@ -24,9 +24,16 @@ public interface ProjectConfigMapper {
         projectConfig.getIssueTypes().forEach(issueType -> issueType.setProjectConfig(projectConfig));
     }
 
-    @Mapping(source = "issueStatuses", target = "issueStatuses")
-    @Mapping(source = "issuePriorities", target = "issuePriorities")
-    @Mapping(source = "issueTypes", target = "issueTypes")
+    @AfterMapping
+    default void linkIssueDescriptions(@MappingTarget ProjectConfig projectConfig) {
+        projectConfig.getIssueDescriptions().forEach(issueDescription -> issueDescription.setProjectConfig(projectConfig));
+    }
+
+    @AfterMapping
+    default void linkSprintStatuses(@MappingTarget ProjectConfig projectConfig) {
+        projectConfig.getSprintStatuses().forEach(sprintStatus -> sprintStatus.setProjectConfig(projectConfig));
+    }
+
     ProjectConfigDTO toDto(ProjectConfig projectConfig);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)

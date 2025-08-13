@@ -22,24 +22,25 @@ public class IssueDescriptionsController {
     }
 
     @PostMapping("/{projectId}")
-    @RequiresPermission({"CONFIG_CRUD"})
+    @RequiresPermission({"CONFIG_ISSUE"})
     public ResponseEntity<IssueDescriptionsDto> create(@PathVariable UUID projectId, @RequestBody @Valid IssueDescriptionsDto issueDescriptionsDto) {
         return new ResponseEntity<>(issueDescriptionsService.create(projectId, issueDescriptionsDto), HttpStatus.CREATED);
     }
 
     @GetMapping("/{projectId}")
+    @RequiresPermission({"CONFIG_READ"})
     public ResponseEntity<List<IssueDescriptionsDto>> getAll(@PathVariable UUID projectId) {
         return new ResponseEntity<>(issueDescriptionsService.getAll(projectId), HttpStatus.OK);
     }
 
     @PutMapping("/{id}")
-    @RequiresPermission({"CONFIG_CRUD"})
+    @RequiresPermission({"CONFIG_ISSUE"})
     public ResponseEntity<IssueDescriptionsDto> update(@PathVariable Long id, @RequestBody @Valid IssueDescriptionsDto issueDescriptionsDto) {
         return new ResponseEntity<>(issueDescriptionsService.update(id, issueDescriptionsDto), HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
-    @RequiresPermission({"CONFIG_CRUD"})
+    @RequiresPermission({"CONFIG_DELETE"})
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         issueDescriptionsService.delete(id);
         return ResponseEntity.noContent().build();

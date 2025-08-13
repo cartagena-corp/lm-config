@@ -5,7 +5,6 @@ import cartagenacorp.lm_config.entity.IssuePriority;
 import cartagenacorp.lm_config.entity.ProjectConfig;
 import cartagenacorp.lm_config.mapper.NamedIdMapper;
 import cartagenacorp.lm_config.repository.IssuePriorityRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,7 +21,6 @@ public class IssuePriorityService {
     private final ProjectConfigService configService;
     private final NamedIdMapper namedIdMapper;
 
-    @Autowired
     public IssuePriorityService(IssuePriorityRepository priorityRepository, ProjectConfigService configService, NamedIdMapper namedIdMapper) {
         this.priorityRepository = priorityRepository;
         this.configService = configService;
