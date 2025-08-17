@@ -28,6 +28,7 @@ public class ProjectStatusService {
 
     public NamedIdDTO create(NamedIdDTO namedIdDTO) {
         ProjectStatus status = namedIdMapper.toEntityProjectStatus(namedIdDTO);
+        status.setOrganizationId(JwtContextHolder.getOrganizationId());
         return namedIdMapper.toDto(statusRepository.save(status));
     }
 
@@ -38,14 +39,16 @@ public class ProjectStatusService {
     }
 
     public NamedIdDTO update(Long id, NamedIdDTO namedIdDTO) {
-        ProjectStatus status = statusRepository.findById(id)
+        ProjectStatus status = statusRepository.findByIdAndOrganizationId(id, JwtContextHolder.getOrganizationId())
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Status not found"));
         namedIdMapper.partialUpdateProjectStatus(namedIdDTO, status);
         return namedIdMapper.toDto(statusRepository.save(status));
     }
 
     public void delete(Long id) {
-        statusRepository.deleteById(id);
+        ProjectStatus status = statusRepository.findByIdAndOrganizationId(id, JwtContextHolder.getOrganizationId())
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Status not found"));
+        statusRepository.delete(status);
     }
 
     @Transactional

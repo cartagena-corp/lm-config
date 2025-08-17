@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Repository
@@ -14,6 +15,8 @@ public interface ProjectStatusRepository extends JpaRepository<ProjectStatus, Lo
     List<ProjectStatus> findAllByOrganizationIdOrderByOrderIndexAsc(UUID organizationId);
 
     List<ProjectStatus> findByOrganizationId(UUID organizationId);
+
+    Optional<ProjectStatus> findByIdAndOrganizationId(Long id, UUID organizationId);
 
     @Modifying
     @Query("DELETE FROM ProjectStatus r WHERE r.organizationId = :organizationId")
