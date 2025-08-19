@@ -48,4 +48,7 @@ public class ProjectConfig {
     @OrderBy("orderIndex ASC")
     private List<IssueDescriptions> issueDescriptions = new ArrayList<>();
 
+    @Column(name = "organization_id")
+    private UUID organizationId;
+
 }

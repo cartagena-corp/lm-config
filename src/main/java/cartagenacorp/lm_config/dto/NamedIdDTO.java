@@ -20,4 +20,6 @@ public class NamedIdDTO {
     private String color;
 
     private Integer orderIndex;
+
+    private String organizationId;
 }
