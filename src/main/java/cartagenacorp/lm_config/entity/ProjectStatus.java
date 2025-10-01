@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.UUID;
+
 @Entity
 @Table(name = "project_status")
 @Data
@@ -20,4 +22,7 @@ public class ProjectStatus {
     private String color;
 
     private Integer orderIndex;
+
+    @Column(name = "organization_id")
+    private UUID organizationId;
 }

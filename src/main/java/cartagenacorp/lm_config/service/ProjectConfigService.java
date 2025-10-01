@@ -2,8 +2,11 @@ package cartagenacorp.lm_config.service;
 
 import cartagenacorp.lm_config.entity.*;
 import cartagenacorp.lm_config.repository.*;
+import cartagenacorp.lm_config.util.JwtContextHolder;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Arrays;
 import java.util.List;
@@ -37,8 +40,10 @@ public class ProjectConfigService {
     public ProjectConfig getOrCreateConfig(UUID projectId) {
         ProjectConfig projectConfig = configRepository.findByProjectId(projectId)
                 .orElseGet(() -> {
+                    UUID organizationId = JwtContextHolder.getOrganizationId();
                     ProjectConfig config = new ProjectConfig();
                     config.setProjectId(projectId);
+                    config.setOrganizationId(organizationId);
                     return configRepository.save(config);
                 });
 
@@ -88,6 +93,17 @@ public class ProjectConfigService {
         }
 
         return projectConfig;
+    }
+
+    @Transactional
+    public void deleteConfigByProjectId(UUID projectId) {
+        UUID organizationId = JwtContextHolder.getOrganizationId();
+        ProjectConfig projectConfig = configRepository.findByProjectId(projectId)
+                .orElseThrow(() -> new EntityNotFoundException("Project config not found for project ID: " + projectId));
+        if(!projectConfig.getOrganizationId().equals(organizationId)) {
+            throw new EntityNotFoundException("Project config does not belong to the current organization");
+        }
+        configRepository.deleteByProjectId(projectId);
     }
 }
 

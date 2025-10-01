@@ -10,4 +10,6 @@ import java.util.UUID;
 @Repository
 public interface ProjectConfigRepository extends JpaRepository<ProjectConfig, Long> {
     Optional<ProjectConfig> findByProjectId(UUID projectId);
+
+    void deleteByProjectId(UUID projectId);
 }
