@@ -33,10 +33,10 @@ public class IssuePriorityController {
         return ResponseEntity.ok(service.getAll(projectId));
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/{projectId}")
     @RequiresPermission({"CONFIG_ISSUE"})
-    public ResponseEntity<NamedIdDTO> update(@PathVariable Long id, @RequestBody @Valid NamedIdDTO namedIdDTO) {
-        return ResponseEntity.ok(service.update(id, namedIdDTO));
+    public ResponseEntity<List<NamedIdDTO>> update(@PathVariable UUID projectId, @RequestBody @Valid List<NamedIdDTO> priorities) {
+        return ResponseEntity.ok(service.update(projectId, priorities));
     }
 
     @DeleteMapping("/{id}")
