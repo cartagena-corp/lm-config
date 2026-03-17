@@ -8,11 +8,20 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
-    open-in-view: 'false'
+    open-in-view: false
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
 server:
   port: '8088'
 app:
   cors:
     allowed-origins: http://localhost:3000
   jwt:
-    secret: ${JWT_SECRET}
+    secret: /xOi/suRrv34JlM+wp4iv37y/m42bTTXbJyeaF5ZwXQ=
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+  endpoint:
+    health:
+      show-details: never
