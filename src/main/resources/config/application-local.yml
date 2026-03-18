@@ -2,7 +2,7 @@ spring:
   application:
     name: lm-config
   datasource:
-    url: jdbc:postgresql://localhost:5432/lamuralla
+    url: ${DB_URL}
     username: ${DB_USERNAME}
     password: ${DB_PASSWORD}
   jpa:
@@ -11,12 +11,12 @@ spring:
     open-in-view: false
     database-platform: org.hibernate.dialect.PostgreSQLDialect
 server:
-  port: '8088'
+  port: ${SERVER_PORT:8088}
 app:
   cors:
     allowed-origins: http://localhost:3000
   jwt:
-    secret: /xOi/suRrv34JlM+wp4iv37y/m42bTTXbJyeaF5ZwXQ=
+    secret: ${JWT_SECRET}
 management:
   endpoints:
     web:
